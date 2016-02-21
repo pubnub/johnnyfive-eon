@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Temperature Data from Arduino</title>
+  <link type="text/css" rel="stylesheet" href="//pubnub.github.io/eon/v/eon/0.0.9/eon.css" />
+  <style type="text/css">
+  
+  * { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+  body {
+      font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', 'Roboto Light', 'Segoe UI Web Light', 'Segoe UI Light', 'Segoe UI Web Regular', 'Segoe UI', Helvetica, Arial, sans-serif; 
+      margin: 1em;
+  }
+  header {
+    margin-bottom: 100px;
+  }
+  h1 {
+    font-weight: 200;
+  }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Temperature Data from Arduino</h1>
+</header>
+
+<div id="chart">
+  <div id="temp"></div>
+</div>
+
+<script src="//cdn.pubnub.com/pubnub-3.10.2.js"></script>
+<script src="//pubnub.github.io/eon/v/eon/0.0.9/eon.js"></script>
+<script>
+
+var pubnub = PUBNUB.init({
+  publish_key: 'pub-c-156a6d5f-22bd-4a13-848d-b5b4d4b36695',
+  subscribe_key: 'sub-c-f762fb78-2724-11e4-a4df-02ee2ddab7fe'
+});
+
+var channel = 'temperature-ds18b20';
+
+eon.chart({
+  channel: channel,
+  generate: {
+    bindto: '#temp',
+    data: {
+      type: 'line',
+      colors: {
+        temperature: '#663399'
+      }
+    },
+    axis: {
+      x: {
+        type: 'timeseries',
+        tick: {
+          format: '%H:%m:%S',
+          fit: true
+        },
+        label: {
+          text: 'Time',
+        }
+      },
+      y: {
+        label: {
+          text: 'Celsius',
+          position: 'outer-middle'
+        },
+        tick: {
+          format: function (d) {
+            var df = Number( d3.format('.2f')(d) );
+            return df;
+          }
+        }
+      }
+  }
+},
+//history:true,
+pubnub: pubnub,
+limit: 30,
+transform: function(m) {
+  return { eon: {
+      temperature: m.eon.temperature.toFixed(1)
+    }}
+  }
+});
+
+</script>
+</body>
+</html>
