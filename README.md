@@ -27,6 +27,12 @@ When you are using Arduino with Johnny-Five, you need to install **ConfigurableF
 5. Go to **File** > **Examples** > **ConfigurableFirmata**
 6. Upload the code to the device
 
+### Arduino Wiring
+
+
+![DS18B20 OneWire digital temperature](temperature/arduino-sd18b20_bb.png)
+
+
 Then run *temperature.js*:
 
 ```bash
