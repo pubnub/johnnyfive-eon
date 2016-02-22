@@ -18,7 +18,9 @@ The temperature data comes from a [DS18B20](http://www.maximintegrated.com/en/pr
 
 When you are using Arduino with Johnny-Five, you need to install **ConfigurableFirmata** to your Arduino to be able to run the code. The code requires OneWire support using the ConfigurableFirmata.
 
-### Installing ConfigurableFirmata
+### 1. Hardware 
+
+#### Installing ConfigurableFirmata
 
 1. Connect your Arduino to computer with a USB cable
 2. On Arduino IDE, go to **Sketch** > **Include Library** > **Manage Libraries**
@@ -27,14 +29,87 @@ When you are using Arduino with Johnny-Five, you need to install **ConfigurableF
 5. Go to **File** > **Examples** > **ConfigurableFirmata**
 6. Upload the code to the device
 
-### Arduino Wiring
+#### Arduino Wiring
 
 
 ![DS18B20 OneWire digital temperature](temperature/arduino-sd18b20_bb.png)
 
+#### Publishing the Sensor Data to PubNub
 
-Then run *temperature.js*:
+Once you get the data from the sensor, send the data to PubNub.
+
+```javascript
+var pubnub = require('pubnub')({
+  publish_key: 'YOUR_PUB_KEY',
+  subscribe_key: 'YOUR_SUB_KEY'
+});
+
+var data = { eon: {
+  'temperature': temp,
+}};
+
+pubnub.publish({
+  channel: 'temperature-ds18b20',
+  message: data,
+});
+
+```
+
+In thie example code, I am sending data every two seconds.
+
+#### Run the Node.js to Get Temperature from the Sensor
+
+Run *temperature.js*:
 
 ```bash
 $ node temperature.js
 ```
+
+### 2. EON Data Visualization
+
+### Subscribing the Data from PubNub and Plot a Line Graph with EON
+
+The basic line graph can be drawn with EON's `chart()` as it receives the data from PubNub.
+
+```html
+<div id="temp"></div>
+```
+
+```javascript
+var pubnub = PUBNUB.init({
+  publish_key: 'YOUR_PUB_KEY',
+  subscribe_key: 'YOUR_SUB_KEY'
+});
+
+eon.chart({
+  channel: 'temperature-ds18b20',
+  generate: {
+    bindto: '#temp', 
+    data: {
+      type: 'line'
+    }
+  }
+},
+pubnub: pubnub,
+transform: function(m) {
+  return { eon: {
+      temperature: m.eon.temperature
+    }}
+  }
+});
+```
+
+To customize the chart (e.g. changing line colors, adding labels, etc.), please refer [C3.js docs](http://c3js.org/gettingstarted.html#customize).
+
+
+
+#### Run the HTML File
+
+Run `/temperature/temperature.html` file on local server:
+
+```bash
+$ python -m SimpleHTTPServer 8000
+```
+
+Then go to `localhost:8000` on browser, and run `temperature.html`
+![EON line graph](temperature/eon-screenshot.png)
