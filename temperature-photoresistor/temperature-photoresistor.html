@@ -98,12 +98,12 @@ var temp = eon.chart({
           }
         }
       }
-  }
-},
-pubnub: pubnub,
-limit: 30,
-transform: function(m) {
-  return { eon: {
+    }
+  },
+  pubnub: pubnub,
+  limit: 30,
+  transform: function(m) {
+    return { eon: {
       temperature: m.eon.temperature,
       light: m.eon.light
     }}

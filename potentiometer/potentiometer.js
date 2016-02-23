@@ -1,4 +1,3 @@
-
 /* 
  *  PubNub EON Demo with Arduino
  *  Displaying the data sent by potntiometer using Johnny-Five
