@@ -10,31 +10,9 @@ $ npm install johnny-five
 $ npm install pubnub
 ```
 
-## Temperature
+## Overview on Publishing from Hardware & Subscribing to Plot a Graph on Browser
 
-Plotting a spline graph from a temperature data.
-
-The temperature data comes from a [DS18B20](http://www.maximintegrated.com/en/products/analog/sensors-and-sensor-interface/DS18S20.html) sensor, and it is published to PubNub.
-
-When you are using Arduino with Johnny-Five, you need to install **ConfigurableFirmata** to your Arduino to be able to run the code. The code requires OneWire support using the ConfigurableFirmata.
-
-### 1. Hardware 
-
-#### Installing ConfigurableFirmata
-
-1. Connect your Arduino to computer with a USB cable
-2. On Arduino IDE, go to **Sketch** > **Include Library** > **Manage Libraries**
-3. Search for "ConfigurableFirmata"
-4. Click the result, then click **Install**
-5. Go to **File** > **Examples** > **ConfigurableFirmata**
-6. Upload the code to the device
-
-#### Arduino Wiring
-
-
-![DS18B20 OneWire digital temperature](temperature/arduino-sd18b20_bb.png)
-
-#### Publishing the Sensor Data to PubNub
+### Publishing the Sensor Data to PubNub
 
 Once you get the data from the sensor, send the data to PubNub.
 
@@ -45,7 +23,7 @@ var pubnub = require('pubnub')({
 });
 
 var data = { eon: {
-  'temperature': temp,
+  'temperature': temp
 }};
 
 pubnub.publish({
@@ -55,21 +33,11 @@ pubnub.publish({
 
 ```
 
-In thie example code, I am sending data every two seconds.
+### Data Visualization with EON
 
-#### Run the Node.js to Get Temperature from the Sensor
+The basic graph can be drawn with EON's `chart()` as it receives the data from PubNub.
 
-Run *temperature.js*:
-
-```bash
-$ node temperature.js
-```
-
-### 2. EON Data Visualization
-
-### Subscribing the Data from PubNub and Plot a Line Graph with EON
-
-The basic line graph can be drawn with EON's `chart()` as it receives the data from PubNub.
+Chart type can be specified with `data.type`. In this example, it is a simple line graph:
 
 ```html
 <div id="temp"></div>
@@ -102,10 +70,9 @@ transform: function(m) {
 To customize the chart (e.g. changing line colors, adding labels, etc.), please refer [C3.js docs](http://c3js.org/gettingstarted.html#customize).
 
 
-
 #### Run the HTML File
 
-Run `/temperature/temperature.html` file on local server:
+For eaxmple, to view the temperature line graph, run `/temperature/temperature.html` file on local server:
 
 ```bash
 $ python -m SimpleHTTPServer 8000
@@ -113,3 +80,44 @@ $ python -m SimpleHTTPServer 8000
 
 Then go to `localhost:8000` on browser, and run `temperature.html`
 ![EON line graph](temperature/eon-screenshot.png)
+
+
+## Hardware Wiring
+
+### Temperature
+
+The temperature data comes from a [DS18B20](http://www.maximintegrated.com/en/products/analog/sensors-and-sensor-interface/DS18S20.html) sensor, and it is published to PubNub.
+
+When you are using Arduino with Johnny-Five, you need to install **ConfigurableFirmata** to your Arduino to be able to run the code. The code requires OneWire support using the ConfigurableFirmata.
+
+
+#### Installing ConfigurableFirmata
+
+1. Connect your Arduino to computer with a USB cable
+2. On Arduino IDE, go to **Sketch** > **Include Library** > **Manage Libraries**
+3. Search for "ConfigurableFirmata"
+4. Click the result, then click **Install**
+5. Go to **File** > **Examples** > **ConfigurableFirmata**
+6. Upload the code to the device
+
+#### Arduino Wiring
+
+
+![DS18B20 OneWire digital temperature](temperature/arduino-sd18b20_bb.png)
+
+
+#### Run the Node.js to Get Temperature from the Sensor
+
+Run *temperature.js*:
+
+```bash
+$ node temperature.js
+```
+
+### Photoresistor (Ambient Light Sensor)
+
+TBD
+
+### Potentiometer 
+
+TBD
