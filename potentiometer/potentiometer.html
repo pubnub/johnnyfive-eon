@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Temperature Data from Arduino</title>
+  <link type="text/css" rel="stylesheet" href="//pubnub.github.io/eon/v/eon/0.0.9/eon.css" />
+  <style type="text/css">
+  
+  * { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+  body {
+      font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', 'Roboto Light', 'Segoe UI Web Light', 'Segoe UI Light', 'Segoe UI Web Regular', 'Segoe UI', Helvetica, Arial, sans-serif; 
+      margin: 1em;
+  }
+  header {
+    margin-bottom: 100px;
+  }
+  h1 {
+    font-weight: 200;
+  }
+  .chartContainer {
+    margin: 1em 2em;
+  }
+  .chartContainer div {
+    margin-bottom: 2em;
+  }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Potentiometer Data from Arduino</h1>
+</header>
+
+<div class="chartContainer">
+  <div id="pot"></div>
+</div>
+
+<script src="//cdn.pubnub.com/pubnub-3.10.2.js"></script>
+<script src="//pubnub.github.io/eon/v/eon/0.0.9/eon.js"></script>
+<script>
+
+var pubnub = PUBNUB.init({
+  publish_key: 'pub-c-156a6d5f-22bd-4a13-848d-b5b4d4b36695',
+  subscribe_key: 'sub-c-f762fb78-2724-11e4-a4df-02ee2ddab7fe'
+});
+
+var channel = 'potentiometer';
+
+// Gauge chart
+
+eon.chart({
+  channel: channel,
+  generate: {
+    bindto: '#pot',
+    data: {
+      type: 'gauge',
+    },
+    gauge: {
+      label:{
+        format: function(value, ratio){
+          return value; //returning here the value, not in %
+        },
+      },
+      min: 0,
+      max: 1023
+    },
+  },
+  pubnub: pubnub
+});
+
+</script>
+</body>
+</html>
