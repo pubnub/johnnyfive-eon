@@ -94,11 +94,13 @@ When you are using Arduino with Johnny-Five, you need to install **ConfigurableF
 #### Installing ConfigurableFirmata
 
 1. Connect your Arduino to computer with a USB cable
-2. On Arduino IDE, go to **Sketch** > **Include Library** > **Manage Libraries**
+2. On [Arduino IDE](https://www.arduino.cc/en/Main/Software), go to **Sketch** > **Include Library** > **Manage Libraries**
 3. Search for "ConfigurableFirmata"
 4. Click the result, then click **Install**
-5. Go to **File** > **Examples** > **ConfigurableFirmata**
+5. Go to **File** > **Examples** > **ConfigurableFirmata** > **ConfigurableFirmata**
 6. Upload the code to the device
+
+Now, you are done with Arduino IDE. You can close it and switch to your fave IDE (or keep using Arduino IED if you like).
 
 #### Arduino Wiring
 
