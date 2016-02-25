@@ -100,7 +100,7 @@ When you are using Arduino with Johnny-Five, you need to install **ConfigurableF
 5. Go to **File** > **Examples** > **ConfigurableFirmata** > **ConfigurableFirmata**
 6. Upload the code to the device
 
-Now, you are done with Arduino IDE. You can close it and switch to your fave IDE (or keep using Arduino IED if you like).
+Now, you are done with Arduino IDE. You can close it and switch to your fave IDE (or keep using Arduino IDE if you like).
 
 #### Arduino Wiring
 
