@@ -24,7 +24,7 @@ board = new five.Board();
 board.on('ready', function() {
   potentiometer = new five.Sensor({
     pin: 'A0',
-    freq: 250
+    freq: 150
   });
 
   potentiometer.on('data', function() {

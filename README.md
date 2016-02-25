@@ -121,3 +121,7 @@ TBD
 ### Potentiometer 
 
 TBD
+
+### DS18S20, Photoresistor, and Potentiometer in one breadboard
+
+![sensors](images/circuit.jpg)
