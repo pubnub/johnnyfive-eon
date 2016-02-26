@@ -114,13 +114,15 @@ Run *temperature.js*:
 $ node temperature.js
 ```
 
-### Photoresistor (Ambient Light Sensor)
+### Photoresistor (Ambient Light Sensor) with DS18B20
 
-TBD
+Both a photoresistor a temperature sensor and the same breadboard to send both values to PubNub together:
+
+![DS18B20 OneWire digital temperature](temperature-photoresistor/ds18b20-photoresistor_bb.png)
 
 ### Potentiometer 
 
-TBD
+![potentiometer](potentiometer/pot_bb.png)
 
 ### DS18S20, Photoresistor, and Potentiometer in one breadboard
 
