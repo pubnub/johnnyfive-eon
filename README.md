@@ -132,7 +132,7 @@ Define the chart type, `gauge` (also label, min/max, ect.) in the eon settings:
 
 ```javascript
 eon.chart({
-  channel: 'potentiometer,
+  channel: 'potentiometer',
   generate: {
     bindto: '#pot',
     data: {
@@ -147,9 +147,7 @@ eon.chart({
       min: 0,
       max: 1023
     },
-  },
-...
-});
+  } ...
 ```
 
 ---
