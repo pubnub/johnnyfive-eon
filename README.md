@@ -150,6 +150,8 @@ eon.chart({
   } ...
 ```
 
+![gauge](potentiometer/gauge.png)
+
 ---
 
 ### DS18S20, Photoresistor, and Potentiometer in one breadboard
