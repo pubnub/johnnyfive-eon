@@ -94,13 +94,11 @@ When you are using Arduino with Johnny-Five, you need to install **ConfigurableF
 #### Installing ConfigurableFirmata
 
 1. Connect your Arduino to computer with a USB cable
-2. On [Arduino IDE](https://www.arduino.cc/en/Main/Software), go to **Sketch** > **Include Library** > **Manage Libraries**
+2. On Arduino IDE, go to **Sketch** > **Include Library** > **Manage Libraries**
 3. Search for "ConfigurableFirmata"
 4. Click the result, then click **Install**
-5. Go to **File** > **Examples** > **ConfigurableFirmata** > **ConfigurableFirmata**
+5. Go to **File** > **Examples** > **ConfigurableFirmata**
 6. Upload the code to the device
-
-Now, you are done with Arduino IDE. You can close it and switch to your fave IDE (or keep using Arduino IDE if you like).
 
 #### Arduino Wiring
 
@@ -110,11 +108,12 @@ Now, you are done with Arduino IDE. You can close it and switch to your fave IDE
 
 #### Run the Node.js to Get Temperature from the Sensor
 
-Run *temperature.js*:
+Change directory to *temperature/* and run *temperature.js*:
 
 ```bash
 $ node temperature.js
 ```
+
 
 ### Photoresistor (Ambient Light Sensor) with DS18B20
 
@@ -122,9 +121,38 @@ Both a photoresistor a temperature sensor and the same breadboard to send both v
 
 ![DS18B20 OneWire digital temperature](temperature-photoresistor/ds18b20-photoresistor_bb.png)
 
+
 ### Potentiometer 
 
 ![potentiometer](potentiometer/pot_bb.png)
+
+For potentiometer, I am using a *gauge* chart, instead of line graph.
+
+Define the chart type, `gauge` (also label, min/max, ect.) in the eon settings:
+
+```javascript
+eon.chart({
+  channel: 'potentiometer,
+  generate: {
+    bindto: '#pot',
+    data: {
+      type: 'gauge',
+    },
+    gauge: {
+      label:{
+        format: function(value, ratio){
+          return value; //returning here the value, not in %
+        },
+      },
+      min: 0,
+      max: 1023
+    },
+  },
+...
+});
+```
+
+---
 
 ### DS18S20, Photoresistor, and Potentiometer in one breadboard
 
