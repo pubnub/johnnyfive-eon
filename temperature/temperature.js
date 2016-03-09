@@ -20,9 +20,9 @@ var channel = 'temperature-ds18b20';
 var temp = 0;
 
 function publish() {
-  var data = { eon: {
+  var data = { 
     'temperature': temp,
-  }};
+  };
   pubnub.publish({
     channel: channel,
     message: data,

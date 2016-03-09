@@ -21,10 +21,10 @@ var temp = 0;
 var light = 0;
 
 function publish() {
-  var data = { eon: {
+  var data = { 
     'temperature': temp,
     'light': light
-  }};
+  };
   pubnub.publish({
     channel: channel,
     message: data,

@@ -22,9 +22,9 @@ var pubnub = require('pubnub')({
   subscribe_key: 'YOUR_SUB_KEY'
 });
 
-var data = { eon: {
+var data = {
   'temperature': temp
-}};
+};
 
 pubnub.publish({
   channel: 'temperature-ds18b20',
@@ -61,7 +61,7 @@ eon.chart({
 pubnub: pubnub,
 transform: function(m) {
   return { eon: {
-      temperature: m.eon.temperature
+      temperature: m.temperature
     }}
   }
 });

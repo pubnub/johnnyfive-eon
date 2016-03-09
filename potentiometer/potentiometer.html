@@ -65,7 +65,12 @@ eon.chart({
       max: 1023
     },
   },
-  pubnub: pubnub
+  pubnub: pubnub,
+  transform: function(m) {
+    return { eon: {
+      potentiometer: m.potentiometer,
+    }}
+  }
 });
 
 </script>

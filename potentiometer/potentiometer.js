@@ -31,9 +31,9 @@ board.on('ready', function() {
     // value range 0 - 1023
     console.log(this.value, this.raw);
 
-    var data = { eon: {
+    var data = { 
       'potentiometer': this.value
-    }};
+    };
     pubnub.publish({
       channel: channel,
       message: data,
