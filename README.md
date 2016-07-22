@@ -7,8 +7,9 @@ $ npm install johnny-five
 ```
 
 ```bash
-$ npm install pubnub
+$ npm install pubnub@3.15.2
 ```
+*Note: This code sample won't work with PubNub SDK v4+, so make sure to install v3.x*
 
 ## Overview on Publishing from Hardware & Subscribing to Plot a Graph on Browser
 
